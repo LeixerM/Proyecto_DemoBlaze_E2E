@@ -1,0 +1,38 @@
+# Build outputs
+.gradle/
+build/
+target/
+out/
+bin/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Serenity / test outputs
+serenity-reports/
+*.log
+public/
+
+# WebDrivers downloaded locally
+drivers/
+chromedriver*
+geckodriver*
+msedgedriver*
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
