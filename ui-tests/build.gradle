@@ -1,0 +1,38 @@
+plugins {
+    id 'net.serenity-bdd.serenity-gradle-plugin' version '5.3.9'
+}
+
+ext {
+    serenityVersion = '5.3.11'
+    // Aligned with the Cucumber version managed by Serenity BDD 5.3.11
+    cucumberVersion = '7.34.2'
+    // Aligned with the JUnit version managed by Serenity BDD 5.3.11
+    junitVersion = '6.0.3'
+    logbackVersion = '1.5.38'
+}
+
+dependencies {
+    implementation "net.serenity-bdd:serenity-core:${serenityVersion}"
+    implementation "net.serenity-bdd:serenity-cucumber:${serenityVersion}"
+    implementation "net.serenity-bdd:serenity-screenplay:${serenityVersion}"
+    implementation "net.serenity-bdd:serenity-screenplay-webdriver:${serenityVersion}"
+    implementation "net.serenity-bdd:serenity-screenplay-rest:${serenityVersion}"
+    implementation "net.serenity-bdd:serenity-ensure:${serenityVersion}"
+    implementation "io.cucumber:cucumber-junit-platform-engine:${cucumberVersion}"
+    implementation platform("org.junit:junit-bom:${junitVersion}")
+    implementation 'org.junit.platform:junit-platform-suite'
+    implementation 'org.junit.jupiter:junit-jupiter-engine'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation "ch.qos.logback:logback-classic:${logbackVersion}"
+}
+
+test {
+    useJUnitPlatform()
+    systemProperties System.getProperties().findAll { it.key.toString().startsWith('environment') || it.key.toString().startsWith('cucumber.') || it.key.toString().startsWith('demoblaze.') }
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+        exceptionFormat 'full'
+    }
+}
+
+test.finalizedBy(aggregate)

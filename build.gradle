@@ -1,0 +1,25 @@
+// Shared configuration for both test modules: Java 21 toolchain, Maven Central, UTF-8.
+subprojects {
+    apply plugin: 'java'
+
+    repositories {
+        mavenCentral()
+    }
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+    }
+}
+
+// Run the API module before the UI module when both are requested in one build.
+project(':ui-tests').tasks.matching { it.name == 'test' }.configureEach {
+    mustRunAfter ':api-tests:test'
+}
+
+gradle.startParameter.continueOnFailure = true
