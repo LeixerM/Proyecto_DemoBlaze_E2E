@@ -1,0 +1,17 @@
+{
+  "catalog": {
+    "Samsung galaxy s6": 360,
+    "Nokia lumia 1520": 820,
+    "Sony xperia z5": 320
+  },
+  "customers": {
+    "guest customer": {
+      "name": "Juan Perez",
+      "country": "Colombia",
+      "city": "Bogota",
+      "creditCard": "4111111111111111",
+      "month": "12",
+      "year": "2030"
+    }
+  }
+}
