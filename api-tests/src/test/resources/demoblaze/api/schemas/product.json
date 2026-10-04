@@ -1,0 +1,8 @@
+{
+  "id": "#number",
+  "title": "#string",
+  "price": "#number? _ > 0",
+  "cat": "#string? ['phone', 'notebook', 'monitor'].includes(_)",
+  "desc": "#string",
+  "img": "#regex imgs/.+\.(jpg|png)"
+}

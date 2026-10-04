@@ -1,0 +1,24 @@
+// API tests with Karate. Karate 2.x ships the JUnit 6 integration as karate-junit6.
+ext {
+    karateVersion = '2.1.3'
+    // Aligned with the JUnit version Karate 2.1.3 is built against
+    junitVersion = '6.1.3'
+}
+
+dependencies {
+    testImplementation "io.karatelabs:karate-junit6:${karateVersion}"
+    testImplementation platform("org.junit:junit-bom:${junitVersion}")
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+    // Forward -Dkarate.* / -Ddemoblaze.* overrides (environment, base URL, credentials) to the test JVM.
+    systemProperties System.getProperties().findAll { it.key.toString().startsWith('karate.') || it.key.toString().startsWith('demoblaze.') }
+    outputs.upToDateWhen { false }
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+        exceptionFormat 'full'
+    }
+}
